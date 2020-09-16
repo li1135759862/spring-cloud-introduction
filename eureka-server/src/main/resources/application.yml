@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: euraka-server
+server:
+  port: 8899
+
+eureka:
+  client:
+    #是否将自己注册到Eureka Server
+    register-with-eureka: false
+    #是否从Eureka Server获取注册信息
+    fetch-registry: false
+    service-url:
+      #单机
+      defaultZone: http://127.0.0.1:8899/eureka
+      #集群
+      #defaultZone: http://127.0.0.1:8899/eureka,http://127.0.0.1:8898/eureka,http://127.0.0.1:8897/eureka
+    #从服务端拉取服务注册信息的周期（秒）
+    registry-fetch-interval-seconds: 10
+  instance:
+    #服务实例IP地址
+    instance-id: 127.0.0.1:8899
+    #是否使用ip注册服务地址
+    prefer-ip-address: false
+    hostname: 127.0.0.1
+    ip-address: 127.0.0.1
+    #向server发送心跳的周期（秒）
+    lease-renewal-interval-in-seconds: 5
+    #超过多久没发送心跳就下线实例（秒）
+    lease-expiration-duration-in-seconds: 15

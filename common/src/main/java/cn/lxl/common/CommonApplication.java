@@ -1,13 +1,29 @@
 package cn.lxl.common;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import cn.lxl.common.api.config.FeignFallbackImpl;
+import feign.Retryer;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@SpringBootApplication
+/**
+ * @author xinleili
+ */
+@Configuration
+@EnableFeignClients
 public class CommonApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CommonApplication.class, args);
-	}
+    @Bean
+    public FeignFallbackImpl feignFallbackImpl(){
+        return new FeignFallbackImpl();
+    }
 
+
+    /**
+     * 重试配置
+     * */
+    @Bean
+    public Retryer feignRetryer() {
+        return new Retryer.Default(100,1000,3);
+    }
 }

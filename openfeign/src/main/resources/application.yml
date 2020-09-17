@@ -1,1 +1,58 @@
+spring:
+  application:
+    name: web
+server:
+  port: 8887
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8899/eureka/
+    #从服务端拉取服务注册信息的周期（秒）
+    registry-fetch-interval-seconds: 10
+  instance:
+    #服务实例IP地址
+    instance-id: web
+    #是否使用ip注册服务地址
+    prefer-ip-address: false
+    hostname: 127.0.0.1
+    ip-address: 127.0.0.1
+    #向server发送心跳的周期（秒）
+    lease-renewal-interval-in-seconds: 5
+    #超过多久没发送心跳就下线实例（秒）
+    lease-expiration-duration-in-seconds: 15
+
+feign:
+  hystrix:
+    # hystrix熔断
+    enabled: true
+  client:
+    config:
+      # 默认default  @FeignClient contextId 区别每个配置
+      default:
+        # 链接超时时间
+        connectTimeout: 5000
+        # 读取超时时间
+        readTimeout: 5000
+
+management:
+  endpoint:
+    hystrix:
+      default:
+        groupKey: "default"
+        commandKey: "UserWeb"
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 8000
+
+
+logging:
+  config: classpath:logback-spring.xml
+
+
 

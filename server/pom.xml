@@ -8,23 +8,21 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>openfeign</artifactId>
-	<version>${project-version}</version>
-	<name>openfeign</name>
-	<description>openfeign</description>
+	<artifactId>server</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>server</name>
+	<description>Demo project for Spring Boot</description>
 
 	<properties>
+		<java.version>1.8</java.version>
+		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
 	</properties>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>cn.lxl</groupId>
-			<artifactId>common</artifactId>
-			<version>${project-version}</version>
 		</dependency>
 
 		<dependency>
@@ -33,8 +31,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+			<groupId>cn.lxl</groupId>
+			<artifactId>common</artifactId>
+			<version>${project-version}</version>
 		</dependency>
 
 		<dependency>

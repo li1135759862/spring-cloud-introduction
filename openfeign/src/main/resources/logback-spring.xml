@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <springProperty scope="context" name="logback.path" source="logback.log.path" defaultValue="${user.home}/logs"/>
+
+    <property name="logback.level" value="INFO"/>
+    <property name="logback.filePath" value="${logback.path}/base/base.%d{yyyy-MM-dd}-%i.log"/>
+    <property name="logback.pattern" value="%d{HH:mm:ss.SSS} [%X{TraceId}] [%X{application}] %-5level %logger -- %msg --%n"/>
+    <property name="logback.fileSize" value="100MB"/>
+    <property name="logback.maxHistory" value="90"/>
+    <property name="logback.discardingThreshold" value="0"/>
+    <property name="logback.queueSize" value="2048"/>
+    <property name="logback.includeCallerData" value="false"/>
+    <property name="logback.app.name" value="base"/>
+
+
+
+
+    <root level="${logback.level}">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

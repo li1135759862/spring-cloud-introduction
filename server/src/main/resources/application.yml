@@ -1,25 +1,8 @@
-server:
-  port: 8889
 spring:
   application:
-    name: gateway
-    cloud:
-      gateway:
-        globalcors:
-          #跨域设置
-          cors-configurations:
-            '[/**]':
-              allowedHeaders: "*"
-              allowedOrigins: "*"
-              allowedMethods:
-                - GET
-                - POST
-                - HEAD
-              allowCredentials: true
-              exposedHeaders:
-                - Content-disposition
-
-
+    name: serverApi
+server:
+  port: 8886
 
 eureka:
   client:
@@ -29,7 +12,7 @@ eureka:
     registry-fetch-interval-seconds: 10
   instance:
     #服务实例IP地址
-    instance-id: gateway
+    instance-id: serverApi
     #是否使用ip注册服务地址
     prefer-ip-address: false
     hostname: 127.0.0.1

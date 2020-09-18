@@ -19,6 +19,12 @@
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
 		<project-version>1.0.0-SNAPSHOT</project-version>
+		<maven.deploy.skip>false</maven.deploy.skip>
+		<docker.repostory>registry.cn-hangzhou.aliyuncs.com</docker.repostory>
+		<docker.namespace>sleking</docker.namespace>
+		<docker.directory>docker</docker.directory>
+		<!-- 打包是否调过docker -->
+		<skipDocker>false</skipDocker>
 	</properties>
 
 	<modules>
@@ -32,6 +38,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+
 		</dependency>
 
 		<dependency>
@@ -47,14 +54,25 @@
 
 	</dependencies>
 
-
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>${maven.deploy.skip}</skip>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>

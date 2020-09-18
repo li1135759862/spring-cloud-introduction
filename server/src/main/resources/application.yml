@@ -7,7 +7,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://127.0.0.1:8899/eureka/
+      defaultZone: http://eureka-server:8899/eureka/
     #从服务端拉取服务注册信息的周期（秒）
     registry-fetch-interval-seconds: 10
   instance:
@@ -15,8 +15,8 @@ eureka:
     instance-id: serverApi
     #是否使用ip注册服务地址
     prefer-ip-address: false
-    hostname: 127.0.0.1
-    ip-address: 127.0.0.1
+    hostname: server
+    ip-address: server
     #向server发送心跳的周期（秒）
     lease-renewal-interval-in-seconds: 5
     #超过多久没发送心跳就下线实例（秒）

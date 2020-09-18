@@ -15,6 +15,8 @@
 	<description>eureka-server</description>
 
 	<properties>
+
+
 	</properties>
 
 	<dependencies>
@@ -55,7 +57,45 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>1.2.2</version>
+				<configuration>
+					<!--镜像名称-->
+					<imageName>${docker.repostory}/${docker.namespace}/${project.name}</imageName>
+					<forceTags>true</forceTags>
+					<imageTags>
+						<imageTag>latest</imageTag>
+					</imageTags>
+					<!-- 指定Dockerfile所在的路径 -->
+					<dockerDirectory>src/docker</dockerDirectory>
+					<!-- 指定仓库地址 -->
+<!--					<dockerHost>http://${docker.repostory}:2375</dockerHost>-->
+					<resources>
+						<resource>
+							<!-- 指定要复制的目录路径，这里是当前目录 -->
+							<targetPath>/</targetPath>
+							<!-- 指定要复制的根目录，这里是target目录 -->
+							<directory>${project.build.directory}</directory>
+							<!-- 指定需要拷贝的文件，这里指最后生成的jar包 -->
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+
+					<!--推送阿里云相关-->
+					<serverId>docker-aliyun</serverId>
+					<!--表示阿里云的docker仓库地址。阿里云的容器镜像服务地址-->
+					<registryUrl>${docker.repostory}</registryUrl>
+					<!--表示推送镜像到仓库。-->
+					<pushImage>true</pushImage>
+					<skipDocker>${skipDocker}</skipDocker>
+				</configuration>
+			</plugin>
 		</plugins>
+
 	</build>
+
 
 </project>

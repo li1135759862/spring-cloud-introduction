@@ -1,0 +1,118 @@
+# eureke
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureke-server
+  labels: server
+    app: server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: server
+      labels: server
+        app: server
+    spec:
+      containers:
+        - name: server
+          image: registry.cn-hangzhou.aliyuncs.com/sleking/eureka-server
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app:
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureke-server
+spec:
+  selector:
+    app: eureke-server
+  ports:
+    - port: 8899
+      targetPort: 8899
+  type: NodePort
+
+
+
+
+# openfeign
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openfeign
+  labels:
+    app: openfeign
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: openfeign
+      labels:
+        app: openfeign
+    spec:
+      containers:
+        - name: openfeign
+          image: registry.cn-hangzhou.aliyuncs.com/sleking/openfeign
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: openfeign
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: openfeign
+spec:
+  selector:
+    app: openfeign
+  ports:
+    - port: 8887
+      targetPort: 8887
+  type: NodePort
+
+
+
+# server
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+  labels:
+    app: server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: server
+      labels:
+        app: server
+    spec:
+      containers:
+        - name: server
+          image: registry.cn-hangzhou.aliyuncs.com/sleking/openfeign
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: server
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+spec:
+  selector:
+    app: server
+  ports:
+    - port: 8886
+      targetPort: 8886
+  type: NodePort

@@ -33,13 +33,10 @@
 		<module>gateway</module>
 		<module>openfeign</module>
 		<module>server</module>
+		<module>webservice</module>
 	</modules>
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
 
-		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -73,6 +70,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>

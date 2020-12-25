@@ -1,13 +1,42 @@
+server:
+  port: 8886
 spring:
   application:
     name: serverApi
-server:
-  port: 8886
+  datasource:
+    #driver-class-name: oracle.jdbc.OracleDriver
+    #url: jdbc:oracle:thin:@115.238.104.98:1521/ATSTEST
+    #username: ats7accounting
+    #password: 123456
+    #driver-class-name: org.postgresql.Driver
+    #url: jdbc:postgresql://10.60.44.84:5433/ats7
+    #username: ats7
+    #password: 123456
+    #mysql
+    #driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.60.44.84:3307/ats7
+    username: root
+    password: root
 
+    hikari:
+      auto-commit: true
+      minimum-idle: 10
+      maximum-pool-size: 10
+      idle-timeout: 30000
+      connection-timeout: 30000
+      max-lifetime: 1800000
+
+
+mybatis-plus:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations:
+    - classpath:mapper/**/*.xml
+  type-aliases-package: cn.lxl.server.pojo
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka-server:8899/eureka/
+      defaultZone: http://luna:8000/eureka/
     #从服务端拉取服务注册信息的周期（秒）
     registry-fetch-interval-seconds: 10
   instance:
@@ -21,3 +50,7 @@ eureka:
     lease-renewal-interval-in-seconds: 5
     #超过多久没发送心跳就下线实例（秒）
     lease-expiration-duration-in-seconds: 15
+
+
+logging:
+  config: classpath:logback-spring.xml

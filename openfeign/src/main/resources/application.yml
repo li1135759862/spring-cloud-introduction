@@ -1,8 +1,12 @@
+server:
+  port: 8887
 spring:
   application:
     name: openfeign
-server:
-  port: 8887
+
+
+
+
 
 eureka:
   client:

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lxl.server.mapper.DictMapper">
+
+
+    <select id="lists" resultType="cn.lxl.server.pojo.Index">
+        SELECT
+            t.table_name tableName,
+            t.column_name columnName,
+            i.index_name indexName,
+            i.index_type indexType,
+            i."UNIQUENESS" uniqueness
+        FROM
+            user_ind_columns t,
+            user_indexes i
+        WHERE
+            t.index_name = i.index_name
+            AND t.table_name = i.table_name
+    </select>
+
+
+    <select id="string" resultType="cn.lxl.server.pojo.Dict">
+        SELECT  sub_trans_name as name ,urid FROM tsys_subtrans  GROUP BY sub_trans_name
+    </select>
+
+    <select id="tableName" resultType="cn.lxl.server.pojo.Dict">
+        SELECT table_name tableName FROM information_schema.`TABLEs` WHERE table_schema='ats7';
+    </select>
+
+    <select id="unifiedpaycode" resultType="cn.lxl.server.pojo.Dict">
+        SELECT urid,name FROM t_unifiedpaycode
+    </select>
+
+    <select id="column" resultType="cn.lxl.server.pojo.Dict">
+        SELECT
+        table_name tableName,
+        column_name columnName,
+        column_default columnDefault,
+        is_nullable isNullable,
+        data_type dataType,
+        column_type columnType,
+        column_comment columnComment,
+        CHARACTER_MAXIMUM_LENGTH characterMaximumLength
+        FROM information_schema.`columns`
+        WHERE table_schema='ats7' and data_type='char'
+    </select>
+
+
+
+
+    <select id="columnComment" resultType="cn.lxl.server.pojo.Dict">
+        SELECT
+        table_name tableName,
+        column_name columnName,
+        column_default columnDefault,
+        is_nullable isNullable,
+        data_type dataType,
+        column_type columnType,
+        column_comment columnComment,
+        CHARACTER_MAXIMUM_LENGTH characterMaximumLength
+        FROM information_schema.`columns`
+        WHERE TABLE_SCHEMA='ats7' and (column_comment='' or column_comment is null)
+    </select>
+</mapper>
